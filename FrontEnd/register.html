@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - Campus Lost & Found</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Campus Lost & Found
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+
+        </div>
+
+    </nav>
+
+
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h1>Create Account</h1>
+
+            <p class="form-subtitle">
+                Register to use Campus Lost & Found
+            </p>
+
+
+            <form onsubmit="registerUser(event)">
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <label>Phone</label>
+
+                <input
+                    type="text"
+                    id="phone"
+                    placeholder="Enter your phone number"
+                    required
+                >
+
+
+                <button type="submit">
+                    Register
+                </button>
+
+            </form>
+
+
+            <p id="message"></p>
+
+
+            <p class="bottom-text">
+
+                Already have an account?
+
+                <a href="login.html">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

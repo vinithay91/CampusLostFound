@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Report Found Item</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  
+    <nav class="navbar">
+
+        <div class="logo">
+            Campus Lost & Found
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="login.html">Login</a>
+
+            <a href="register.html">Register</a>
+
+        </div>
+
+    </nav>
+
+
+    
+
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h1>Report Found Item</h1>
+
+            <p class="form-subtitle">
+                Enter the details of the item you found
+            </p>
+
+
+            <form id="foundForm">
+
+                <label>Item Name</label>
+
+                <input
+                    type="text"
+                    id="itemName"
+                    placeholder="Example: Wallet"
+                    required
+                >
+
+
+                <label>Description</label>
+
+                <input
+                    type="text"
+                    id="description"
+                    placeholder="Describe the item"
+                    required
+                >
+
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    id="category"
+                    placeholder="Example: Wallet, ID Card, Phone"
+                    required
+                >
+
+
+                <label>Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Where did you find it?"
+                    required
+                >
+
+
+                <label>Date Found</label>
+
+                <input
+                    type="date"
+                    id="dateFound"
+                    required
+                >
+
+
+                <label>Contact Number</label>
+
+                <input
+                    type="text"
+                    id="contact"
+                    placeholder="Enter contact number"
+                    required
+                >
+
+
+                <button type="submit">
+                    Report Found Item
+                </button>
+
+            </form>
+
+
+            <p id="message"></p>
+
+
+            <p class="bottom-text">
+
+                <a href="found-items.html">
+                    View Found Items
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    
+
+    <script>
+
+        document.getElementById("foundForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const itemName =
+                    document.getElementById("itemName").value;
+
+                const description =
+                    document.getElementById("description").value;
+
+                const category =
+                    document.getElementById("category").value;
+
+                const location =
+                    document.getElementById("location").value;
+
+                const dateFound =
+                    document.getElementById("dateFound").value;
+
+                const contact =
+                    document.getElementById("contact").value;
+
+
+                const data =
+                    itemName + "," +
+                    description + "," +
+                    category + "," +
+                    location + "," +
+                    dateFound + "," +
+                    contact;
+
+
+                fetch("http://localhost:8080/found-items", {
+
+                    method: "POST",
+
+                    body: data
+
+                })
+
+                .then(response => response.text())
+
+                .then(result => {
+
+                    document.getElementById("message")
+                        .innerText = result;
+
+                })
+
+                .catch(error => {
+
+                    document.getElementById("message")
+                        .innerText =
+                        "Failed to add found item.";
+
+                    console.log(error);
+
+                });
+
+            });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Report Lost Item</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Campus Lost & Found
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="login.html">Login</a>
+
+            <a href="register.html">Register</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Lost Item Form -->
+
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h1>Report Lost Item</h1>
+
+            <p class="form-subtitle">
+                Enter the details of your lost item
+            </p>
+
+
+            <form id="lostForm">
+
+                <label>Item Name</label>
+
+                <input
+                    type="text"
+                    id="itemName"
+                    placeholder="Example: College ID Card"
+                    required
+                >
+
+
+                <label>Description</label>
+
+                <input
+                    type="text"
+                    id="description"
+                    placeholder="Describe the item"
+                    required
+                >
+
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    id="category"
+                    placeholder="Example: ID Card, Wallet, Phone"
+                    required
+                >
+
+
+                <label>Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="Where did you lose it?"
+                    required
+                >
+
+
+                <label>Date Lost</label>
+
+                <input
+                    type="date"
+                    id="dateLost"
+                    required
+                >
+
+
+                <label>Contact Number</label>
+
+                <input
+                    type="text"
+                    id="contact"
+                    placeholder="Enter contact number"
+                    required
+                >
+
+
+                <button type="submit">
+                    Report Lost Item
+                </button>
+
+            </form>
+
+
+            <p id="message"></p>
+
+
+            <p class="bottom-text">
+
+                <a href="lost-items.html">
+                    View Lost Items
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        document.getElementById("lostForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const itemName =
+                    document.getElementById("itemName").value;
+
+                const description =
+                    document.getElementById("description").value;
+
+                const category =
+                    document.getElementById("category").value;
+
+                const location =
+                    document.getElementById("location").value;
+
+                const dateLost =
+                    document.getElementById("dateLost").value;
+
+                const contact =
+                    document.getElementById("contact").value;
+
+
+                const data =
+                    itemName + "," +
+                    description + "," +
+                    category + "," +
+                    location + "," +
+                    dateLost + "," +
+                    contact;
+
+
+                fetch("http://localhost:8080/lost-items", {
+
+                    method: "POST",
+
+                    body: data
+
+                })
+
+                .then(response => response.text())
+
+                .then(result => {
+
+                    document.getElementById("message")
+                        .innerText = result;
+
+                })
+
+                .catch(error => {
+
+                    document.getElementById("message")
+                        .innerText =
+                        "Failed to add lost item.";
+
+                    console.log(error);
+
+                });
+
+            });
+
+    </script>
+
+</body>
+
+</html>

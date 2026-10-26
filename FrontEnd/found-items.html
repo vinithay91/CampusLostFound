@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Found Items - Campus Lost & Found</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Campus Lost & Found
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+
+        </div>
+
+    </nav>
+
+
+    
+
+    <section class="items-section">
+
+        <h1>Found Items</h1>
+
+        <p class="items-subtitle">
+            Items reported as found on campus
+        </p>
+
+        <div id="items" class="items-container">
+
+            <p class="loading">
+                Loading found items...
+            </p>
+
+        </div>
+
+    </section>
+
+
+    
+
+    <script>
+
+        fetch("http://localhost:8080/found-items-list")
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            let output = "";
+
+            if (data.length === 0) {
+
+                output =
+                    "<p class='no-items'>No found items available.</p>";
+
+            } else {
+
+                data.forEach(item => {
+
+                    output += `
+
+                        <div class="item-card">
+
+                            <div class="item-icon">
+                                📦
+                            </div>
+
+                            <h2>
+                                ${item.item_name}
+                            </h2>
+
+                            <p>
+                                <strong>Description:</strong>
+                                ${item.description}
+                            </p>
+
+                            <p>
+                                <strong>Category:</strong>
+                                ${item.category}
+                            </p>
+
+                            <p>
+                                <strong>Location:</strong>
+                                ${item.location}
+                            </p>
+
+                            <p>
+                                <strong>Date Found:</strong>
+                                ${item.date_found}
+                            </p>
+
+                            <p>
+                                <strong>Contact:</strong>
+                                ${item.contact}
+                            </p>
+
+                        </div>
+
+                    `;
+
+                });
+
+            }
+
+            document.getElementById("items")
+                .innerHTML = output;
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            document.getElementById("items")
+                .innerHTML =
+                "<p class='error'>Unable to load found items.</p>";
+
+        });
+
+    </script>
+
+</body>
+
+</html>
